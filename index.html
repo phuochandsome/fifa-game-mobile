@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fifa game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Connect css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- Left sidebar: logo + menu -->
+    <aside class="sidebar">
+      <img class="logo" src ="src/logo.png" >
+        <nav class="menu" aria-label="Main menu">
+          <button class="menu__item is-active" data-page="home" aria-current="page">Home</button>
+          <button class="menu__item" data-page="quests">Quests</button>
+          <button class="menu__item" data-page="signings">Star signings</button>
+        </nav>
+    </aside>
+
+    <!-- Right side: gray area with coin balance + the current page -->
+    <main class="main">
+      <div class="topbar">
+        <div class="coin-pill" aria-label="Coin balance">
+          <img class="coin" src="https://cdn-icons-png.flaticon.com/128/9382/9382189.png">
+            <span class="js-coins">100,000</span>
+        </div>
+      </div>
+
+      <!-- Page 1: Home -->
+      <section class="page page--home" id="page-home">
+        <article class="player">
+          <img class="player__card" src="src/yamal.png" alt="Lamine Yamal player card">
+          <div class="player__info">
+            <h1 class="player__name">Lamine Yamal</h1>
+            <p class="player__meta">RW FC Barcelona Spain</p>
+            <p class="player__bio">A left-footed forward known for his dribbling, passing.</p>
+            <ul class="stats">
+              <li class="stat"><strong>52</strong><span>goals</span></li>
+              <li class="stat"><strong>149</strong><span>official matches</span></li>
+              <li class="stat"><strong>1.78 m</strong><span>height</span></li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- Page 2: Quests -->
+      <section class="page" id="page-quests" hidden>
+        <div class="quests">
+          <div class="tabs" role="tablist" aria-label="Quest type">
+           <button class="tab is-active" role="tab" data-tab="daily">Daily</button>
+           <button class="tab" role="tab" data-tab="weekly">Weekly</button>
+           <button class="tab" role="tab" data-tab="season">Season</button>
+          </div>
+
+          <!-- <div class="card">
+            <div class="card__head">
+              <span>Season Pass&nbsp;&nbsp;-&nbsp;&nbsp;Level <span id="pass-level">0</span></span>
+            </div>
+            <div class="progress">
+              <div class="progress__fill" id="pass-fill"></div>
+            </div>
+          </div> -->
+
+          <div class="quest-list" id="quest-list"></div>
+        </div>
+      </section>
+
+      <!-- Page 3: Star signings -->
+      <section class="page" id="page-signings" hidden>
+        <div class="signings" id="signing-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Connect js -->
+  <script src="script.js"></script>
+</body>
+
+</html>
