@@ -311,10 +311,42 @@ function setupSignButtons() {
     });
   }
 }
+const MAX_ANGLE = 20;
 
+
+function tiltCards(angleX, angleY) {
+  const transformValue = `rotateX(${angleY}deg) rotateY(${angleX}deg)`;
+
+
+  const signImgs = $all('.sign-card > img');
+  for (let i = 0; i < signImgs.length; i++) {
+    signImgs[i].style.transform = transformValue;
+  }
+}
+
+
+function setupTilt() {
+  document.addEventListener('mousemove', function (e) {
+    const dx = e.pageX - window.innerWidth / 2;
+    const dy = e.pageY - window.innerHeight / 2;
+
+
+    const angleX = MAX_ANGLE * dx / (window.innerWidth / 2);
+    const angleY = MAX_ANGLE * dy / (window.innerHeight / 2);
+
+
+    tiltCards(angleX, angleY);
+  });
+
+
+  document.addEventListener('mouseleave', function () {
+    tiltCards(0, 0);
+  });
+}
 /* ---------- Khởi động trang ---------- */
 setupMenu();
 setupTabs();
+setupTilt();
 renderCoins();
 // renderPass();
 renderQuests();
@@ -325,3 +357,5 @@ showPage('home');
 // writes the current coin
 // builds the quest cards for the current tab from the quests data and the player cards from the stars data 
 // show default page
+
+

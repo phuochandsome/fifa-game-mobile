@@ -323,6 +323,7 @@
     padding: 12px;
     background: var(--panel);
     border-radius: 18px;
+    perspective: 400px;
   }
   
   .sign-card>img {
