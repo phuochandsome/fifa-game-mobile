@@ -29,7 +29,7 @@ let playerIndex = 0;
 const stars = [
   { id: 'bale', name: 'Bale', price: 15000, img: 'src/bale.png' },
   { id: 'mbappe', name: 'Mbappé', price: 12000, img: 'src/mbappe.png' },
-  { id: 'maradona', name: 'Maradona', price: 9000, img: 'src/maradona.png' },
+  { id: 'maradona', name: 'Maradona', price: 9000, img: 'src/Mgaradona.png' },
   { id: 'courtois', name: 'Courtois', price: 11000, img: 'src/courtois.png' },
 ];
 const players = [
