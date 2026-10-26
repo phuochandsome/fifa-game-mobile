@@ -25,15 +25,45 @@ const quests = {
     { id: 's1', title: 'Score a hattrick with ST', progress: 0, target: 3, reward: 500, claimed: false },
   ],
 };
-// add
+let playerIndex = 0;   
 const stars = [
   { id: 'bale', name: 'Bale', price: 15000, img: 'src/bale.png' },
-  { id: 'mbappe', name: 'Mbappe', price: 12000, img: 'src/mbappe.png' },
-//   { id: 'maradona', name: 'Maradona', price: 9000, img: '.png' },
+  { id: 'mbappe', name: 'Mbappé', price: 12000, img: 'src/mbappe.png' },
+  { id: 'maradona', name: 'Maradona', price: 9000, img: 'src/maradona.png' },
   { id: 'courtois', name: 'Courtois', price: 11000, img: 'src/courtois.png' },
-
 ];
-
+const players = [
+  {
+    name: 'Lamine Yamal', img: 'src/yamal.png',
+    meta: 'RW FC Barcelona Spain',
+    bio: 'A left-footed forward known for his dribbling, passing.',
+    stats: [
+      { value: '52', label: 'goals' },
+      { value: '149', label: 'official matches' },
+      { value: '1.78 m', label: 'height' },
+    ],
+  },
+  {
+    name: 'Kylian Mbappé', img: 'src/mbappe.png',
+    meta: 'LW Real Madrid France',
+    bio: 'A lightning-fast forward known for his speed and finishing.',
+    stats: [
+      { value: '48', label: 'goals' },
+      { value: '91', label: 'official matches' },
+      { value: '1.78 m', label: 'height' },
+    ],
+  },
+  {
+    name: 'Gareth Bale', img: 'src/bale.png',
+    meta: 'RW Real Madrid Wales',
+    bio: 'A powerful winger known for his pace and long-range shots.',
+    stats: [
+      { value: '41', label: 'goals' },
+      { value: '111', label: 'official matches' },
+      { value: '1.83 m', label: 'height' },
+    ],
+  },
+];
 // const XP_PER_CLAIM = 40;
 
 function $(selector) {
@@ -311,6 +341,54 @@ function setupSignButtons() {
     });
   }
 }
+
+
+function renderPlayer() {
+  const p = players[playerIndex];
+
+  $('#player-img').src = p.img;
+  $('#player-img').alt = p.name + ' player card';
+  $('#player-name').textContent = p.name;
+  $('#player-meta').textContent = p.meta;
+  $('#player-bio').textContent = p.bio;
+
+  // 3 ô thống kê
+  let statsHtml = '';
+  for (let i = 0; i < p.stats.length; i++) {
+    const s = p.stats[i];
+    statsHtml += `<li class="stat"><strong>${s.value}</strong><span>${s.label}</span></li>`;
+  }
+  $('#player-stats').innerHTML = statsHtml;
+
+  // chấm tròn: chấm của cầu thủ đang xem sẽ có màu xanh
+  let dotsHtml = '';
+  for (let i = 0; i < players.length; i++) {
+    let dotClass = 'dot';
+    if (i === playerIndex) {
+      dotClass = 'dot is-active';
+    }
+    dotsHtml += `<span class="${dotClass}"></span>`;
+  }
+  $('#player-dots').innerHTML = dotsHtml;
+}
+
+function setupPlayerSwitch() {
+  $('#next-player').addEventListener('click', function () {
+    playerIndex++;
+    if (playerIndex >= players.length) {
+      playerIndex = 0;                    // hết người cuối -> quay về đầu
+    }
+    renderPlayer();
+  });
+
+  $('#prev-player').addEventListener('click', function () {
+    playerIndex--;
+    if (playerIndex < 0) {
+      playerIndex = players.length - 1;   // đang ở người đầu -> nhảy về cuối
+    }
+    renderPlayer();
+  });
+}
 const MAX_ANGLE = 20;
 
 
@@ -347,6 +425,8 @@ function setupTilt() {
 setupMenu();
 setupTabs();
 setupTilt();
+setupPlayerSwitch();
+renderPlayer();
 renderCoins();
 // renderPass();
 renderQuests();
